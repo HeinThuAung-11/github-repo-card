@@ -1,37 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitHub Repository Card
+
+A client-side GitHub repository explorer built with Next.js, TypeScript, and Tailwind CSS. Fetches and displays public repositories with search, filtering, sorting, and pagination.
+
+## Features
+
+- Fetches all public repositories from the GitHub API (multi-page support)
+- Real-time search filtering by repository name
+- Filter by programming language
+- Sort by stars or name (ascending/descending)
+- Filter repos that have a description
+- Paginated grid layout (12 repos per page)
+- Hover-to-expand cards showing full descriptions
+- Language colour badges for 20+ languages
+- Loading spinner, error handling, and rate-limit detection with retry
+- Fully responsive design (mobile, tablet, desktop)
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript (strict mode)
+- **Styling:** Tailwind CSS
+- **Data:** GitHub REST API v3
+- **No external UI or data-fetching libraries** — native `fetch` only
+
+## Project Structure
+
+```
+app/
+  page.tsx              ← Main page: state, fetch, search/filter/sort logic
+  layout.tsx            ← Root layout with metadata and fonts
+  globals.css           ← Tailwind config and custom styles
+
+components/
+  RepoCard.tsx          ← Single repo card with hover expand
+  RepoGrid.tsx          ← Responsive grid of cards + empty state
+  SearchInput.tsx       ← Controlled search input
+  FilterBar.tsx         ← Language filter, sort controls, description toggle
+  Pagination.tsx        ← Page navigation controls
+  ResultCount.tsx       ← Shows total and filtered repo counts
+  StatusMessage.tsx     ← Loading spinner and error/retry display
+
+types/
+  github.ts             ← Repo interface, FilterState, sort types, constants
+```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## AI Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+I used Claude (Anthropic) to assist with parts of this project — specifically the initial fetch logic, TypeScript types, and basic page structure. AI was used mainly for boilerplate and repetitive tasks, while I made the decisions around structure, organisation, and performance.
 
-## Learn More
+**What prompts worked well:**
+- Specific prompts describing exact fields to display, how to handle missing data, and how search should behave
+- Constraint-based prompts ("no Axios, no UI libraries, native fetch only")
+- Structured code review requests with specific categories (architecture, performance, edge cases)
 
-To learn more about Next.js, take a look at the following resources:
+**What I corrected:**
+- Refactored from a single file into smaller components (RepoCard, RepoGrid, SearchInput)
+- Simplified unnecessary TypeScript types the AI generated
+- Moved a `toLowerCase()` call outside the filter loop to avoid repeated computation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# github-repo-card
+For the full breakdown, see [AI_USAGE.txt](./AI_USAGE.txt).

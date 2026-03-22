@@ -1,0 +1,55 @@
+AI Usage in This Project
+========================
+
+How I Used AI
+-------------
+I used Claude (Anthropic) to help with the initial fetch logic, some TypeScript
+types, and the basic page structure. AI was used as a coding assistant for
+boilerplate and repetitive tasks — not as the sole author of the project.
+
+Specifically, AI helped with:
+- Writing the initial useEffect + fetch logic with AbortController
+- Generating the Repo TypeScript interface from the GitHub API response shape
+- Scaffolding the basic page layout and component props
+- Suggesting Tailwind classes for the responsive grid and card styling
+- Adding error handling for GitHub API rate limits
+- Implementing multi-page fetching using Link header parsing
+
+What Prompts Worked Well
+------------------------
+- Describing the exact component structure (file paths, responsibilities, prop
+  types) produced clean, usable output on the first try.
+- Specifying field-level fallback rules (e.g. "if no description, show 'No
+  description provided' in muted text") meant less back-and-forth editing.
+- Asking for a structured code review with specific categories (architecture,
+  performance, bad practices, edge cases, readability) gave organised, actionable
+  feedback rather than vague suggestions.
+- Constraint-based prompts ("no Axios, no UI libraries, native fetch only")
+  prevented the AI from pulling in unnecessary dependencies.
+- Incremental prompts — building features one at a time (base -> pagination ->
+  filters -> hover effects) kept the output focused and easy to verify.
+
+What I Corrected
+----------------
+There were a few things I corrected myself:
+
+1. Single-file structure: Claude initially placed everything in a single file,
+   so I refactored it into smaller components like RepoCard, RepoGrid, and
+   SearchInput. This improved readability and made each component easier to
+   maintain independently.
+
+2. Unnecessary types: It generated extra TypeScript types and interfaces that
+   weren't needed for the project's scope. I simplified these down to only what
+   the project actually uses — one Repo interface, one FilterState interface,
+   and a few type aliases.
+
+3. Performance fix: The AI placed a toLowerCase() call inside the filter callback,
+   meaning it ran on every iteration of the array. I moved it outside the loop so
+   the search term is normalised once, then reused across all comparisons.
+
+Overall
+-------
+I used AI mainly for boilerplate and repetitive tasks, while I made the decisions
+around structure, organisation, and performance. Every piece of AI-generated code
+was reviewed, tested, and in several cases rewritten before being included in the
+final project.
