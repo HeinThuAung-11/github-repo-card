@@ -1,3 +1,4 @@
+import { ChevronIcon } from "@/components/icons";
 import { ALL_LANGUAGES, FilterState, SortDirection, SortField } from "@/types/github";
 
 const SORT_FIELD_OPTIONS: { value: SortField; label: string }[] = [
@@ -59,16 +60,7 @@ export default function FilterBar({ filters, languages, onChange }: FilterBarPro
         onClick={toggleDirection}
         className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm transition-all hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10"
       >
-        <svg
-          className={`h-3.5 w-3.5 text-slate-500 transition-transform ${filters.sortDirection === "asc" ? "rotate-180" : ""}`}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2.5}
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronIcon className={`h-3.5 w-3.5 text-slate-500 transition-transform ${filters.sortDirection === "asc" ? "rotate-180" : ""}`} />
         {SORT_DIRECTION_LABELS[filters.sortDirection][filters.sortField]}
       </button>
 

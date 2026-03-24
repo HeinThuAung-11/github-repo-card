@@ -1,3 +1,5 @@
+import { SearchIcon } from "@/components/icons";
+
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -6,20 +8,7 @@ interface SearchInputProps {
 export default function SearchInput({ value, onChange }: SearchInputProps) {
   return (
     <div className="relative">
-      <svg
-        className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={2}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-        />
-      </svg>
+      <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
       <input
         type="text"
         value={value}
